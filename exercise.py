@@ -19,7 +19,7 @@ def prisoners_dilemma() -> int:
     while player_a != player_b:
         if player_a == 'cooperate' and player_b == 'defect':
             print('A: -20, B: 0')
-        elif player_a == 'defect' and player_b == 'cooperate':
+        else:
             print('A: 0, B: -20')
 
         player_a = str(input('Player A: Would you like to Cooperate or Defect? ')).lower()
