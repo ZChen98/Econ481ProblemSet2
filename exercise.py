@@ -17,12 +17,10 @@ def prisoners_dilemma() -> int:
     round_played = 1
 
     while player_a != player_b:
-        if player_a == 'cooperate':
-            if player_b == 'defect':
-                print('A: -20, B: 0')
-        elif player_a == 'defect':
-            if player_b == 'cooperate':
-                print('A: 0, B: -20')
+        if player_a == 'cooperate' and player_b == 'defect':
+            print('A: -20, B: 0')
+        elif player_a == 'defect' and player_b == 'cooperate':
+            print('A: 0, B: -20')
 
         player_a = str(input('Player A: Would you like to Cooperate or Defect? ')).lower()
         player_b = str(input('Player B: Would you like to Cooperate or Defect? ')).lower()
