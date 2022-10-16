@@ -3,6 +3,7 @@ Justin Chen
 Problem Set 2: Basic Operation
 """
 
+# a)
 def prisoners_dilemma() -> int:
     """
     Asks two players their strategies and ends when both players choose same strategies
@@ -34,6 +35,7 @@ def prisoners_dilemma() -> int:
 
     return round_played
 
+# b)
 def factorial(n_arg: int) -> int:
     """Calculates the factorial of any positive integer
 
@@ -52,6 +54,7 @@ def factorial(n_arg: int) -> int:
 
     return factorials
 
+# c)
 def compute_frequency(words: [str]) -> dict:
     """Computes the frequency of each unique string
 

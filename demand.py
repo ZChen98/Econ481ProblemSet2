@@ -4,6 +4,7 @@ Problem Set 2: Demand Exercise
 """
 import math
 
+# a)
 def compute_elasticity(price1:float, price2:float, quant1:float, quant2:float) -> float:
     """Compute the elasticity
 
@@ -21,6 +22,7 @@ def compute_elasticity(price1:float, price2:float, quant1:float, quant2:float) -
     elasticity = math.log(quant2 / quant1, math.e) / math.log(price2 / price1, math.e)
     return elasticity
 
+# b)
 def check_elasticity(elasticity:float) -> str:
     """Return one of 'Elastic' | 'Inelastic' | Unit-Elastic'
 
@@ -32,12 +34,13 @@ def check_elasticity(elasticity:float) -> str:
     =======
     String of whether an elasticity is elastic, inelastic, or unit-elastic
     """
-    if elasticity > 1:
+    if abs(elasticity) > 1:
         return 'Elastic'
-    if elasticity < 1:
+    if abs(elasticity) < 1:
         return 'Inelastic'
     return 'Unit-Elastic'
 
+# c)
 def compute_demand(sales:float, init_price:float, new_price:float, elasticity:float) -> float:
     """Compute the predicted demand at the new price
 
@@ -53,9 +56,10 @@ def compute_demand(sales:float, init_price:float, new_price:float, elasticity:fl
     Predicted demand at the new price
     """
     predicted_demand = 0.0
-    predicted_demand = elasticity * sales * (new_price / init_price)
+    predicted_demand = math.exp(elasticity * math.log(new_price / init_price, math.e) + math.log(sales, math.e))
     return predicted_demand
 
+# d)
 def main():
     """Main function to ask the user whether to calculate either
     elasticity or demand
@@ -79,10 +83,7 @@ def main():
 
         while price_points > 0:
             new_price = float(input('Please enter the new price point: '))
-            demand_dict[new_price] = round(compute_demand(sales, init_price, new_price, elasticity), 2)
+            demand_dict[new_price] = compute_demand(sales, init_price, new_price, elasticity)
             price_points -= 1
 
         print(demand_dict)
-
-if __name__=="__main__":
-    main()
