@@ -19,7 +19,7 @@ def compute_elasticity(price1:float, price2:float, quant1:float, quant2:float) -
     Elasticity
     """
     elasticity = math.log(quant2 / quant1, math.e) / math.log(price2 / price1, math.e)
-    return round(elasticity, 2)
+    return elasticity
 
 def check_elasticity(elasticity:float) -> str:
     """Return one of 'Elastic' | 'Inelastic' | Unit-Elastic'
@@ -53,7 +53,7 @@ def compute_demand(sales:float, init_price:float, new_price:float, elasticity:fl
     Predicted demand at the new price
     """
     predicted_demand = 0.0
-    predicted_demand = elasticity * sales * math.e * (new_price / init_price)
+    predicted_demand = elasticity * sales * (new_price / init_price)
     return predicted_demand
 
 def main():
@@ -77,9 +77,9 @@ def main():
         price_points = int(input('Please enter the number of new price points: '))
         demand_dict = {}
 
-        while price_points >= 0:
+        while price_points > 0:
             new_price = float(input('Please enter the new price point: '))
-            demand_dict.update(new_price, compute_demand(sales, init_price, new_price, elasticity))
+            demand_dict[new_price] = compute_demand(sales, init_price, new_price, elasticity)
             price_points -= 1
 
         print(demand_dict)
