@@ -79,7 +79,7 @@ def main():
 
         while price_points > 0:
             new_price = float(input('Please enter the new price point: '))
-            demand_dict[new_price] = compute_demand(sales, init_price, new_price, elasticity)
+            demand_dict[new_price] = round(compute_demand(sales, init_price, new_price, elasticity), 2)
             price_points -= 1
 
         print(demand_dict)
