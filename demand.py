@@ -19,11 +19,11 @@ def compute_elasticity(price1:float, price2:float, quant1:float, quant2:float) -
     Elasticity
     """
     elasticity = math.log(quant2 / quant1, math.e) / math.log(price2 / price1, math.e)
-    return elasticity
+    return round(elasticity, 2)
 
 def check_elasticity(elasticity:float) -> str:
     """Return one of 'Elastic' | 'Inelastic' | Unit-Elastic'
-    
+
     Parameters
     ==========
     elasticity: float; the numeric elasticity of a good
@@ -34,23 +34,55 @@ def check_elasticity(elasticity:float) -> str:
     """
     if elasticity > 1:
         return 'Elastic'
-    elif elasticity < 1:
+    if elasticity < 1:
         return 'Inelastic'
-    else:
-        return 'Unit-Elastic'
+    return 'Unit-Elastic'
 
 def compute_demand(sales:float, init_price:float, new_price:float, elasticity:float) -> float:
     """Compute the predicted demand at the new price
-    
+
     Parameters
     ==========
-    sales:
-    init_price:
-    new_price:
-    elasticity:
+    sales: float; the numeric sales of the good
+    init_price: float; the numeric initial price
+    new_price: float; the numeric new price
+    elasticity: float; the numeric elasticity of the good
 
     Returns
     =======
-
+    Predicted demand at the new price
     """
-    pass
+    predicted_demand = 0.0
+    predicted_demand = elasticity * sales * math.e * (new_price / init_price)
+    return predicted_demand
+
+def main():
+    """Main function to ask the user whether to calculate either
+    elasticity or demand
+    """
+    user_input = str(input('Would you like calculate elasticity or demand? ')).lower()
+    if user_input == 'elasticity':
+        old_price = float(input('Please enter the old price: '))
+        new_price = float(input('Please enter the new price: '))
+        old_quantity = float(input('Please enter the old quantity: '))
+        new_quantity = float(input('Please enter the new quantity: '))
+        elasticity = compute_elasticity(old_price, new_price, old_quantity, new_quantity)
+
+        print(elasticity)
+        print(f'The good is {check_elasticity(elasticity)}.')
+    else:
+        sales = float(input('Please enter the sales quantity: '))
+        init_price = float(input('Please enter the initial price: '))
+        elasticity = float(input('Please enter the elasticity: '))
+        price_points = int(input('Please enter the number of new price points: '))
+        demand_dict = {}
+
+        while price_points >= 0:
+            new_price = float(input('Please enter the new price point: '))
+            demand_dict.update(new_price, compute_demand(sales, init_price, new_price, elasticity))
+            price_points -= 1
+
+        print(demand_dict)
+
+if __name__=="__main__":
+    main()
