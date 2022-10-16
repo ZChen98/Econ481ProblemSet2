@@ -50,7 +50,7 @@ def factorial(n_arg: int) -> int:
     factorials = 1
 
     for i in range(1, n_arg + 1):
-        factorials = factorials * i
+        factorials *= i
 
     return factorials
 
